@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const thoughts = require('../../models/Thought');
+const thoughts = require('../models/Thought.js');
 
 //get all users
 router.get('/', (req, res) => {
@@ -31,3 +31,5 @@ router.delete('/:id', (req, res) => {
     thoughts.findOneAndDelete({ _id: req.params.id })
     .then((dbUserData) => res.json(dbUserData));
 });
+
+module.exports = router;
