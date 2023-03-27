@@ -10,15 +10,15 @@ connection.once('open', async () => {
     //await users.deleteMany({});
     //await thoughts.deleteMany({});
 
-    users.push({
+    users.create({
         username: 'johndoe',
         email: 'email1@gmail.com',
     });
 
-    users.push({
-        username: 'janedoe2',
-        email: 'email2@gmail.com',
-    });
+    // users.push({
+    //     username: 'janedoe2',
+    //     email: 'email2@gmail.com',
+    // });
 
 });
 

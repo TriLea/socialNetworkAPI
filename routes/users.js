@@ -1,49 +1,50 @@
 const router = require('express').Router();
-const user = require('../models/User.js');
+const { User, Thought } = require('../models');
+//const User = require('../models/User');
 
-//get all users
+//get all Users
 router.get('/', (req, res) => {
     //what are the braces in the find for?
     // why is the first dbUserData in parantheses?
 
-    user.find({}) // find all users
+    User.find() // find all Users
     .then((dbUserData) => res.json(dbUserData));
 });
 
-//get one user by id
+//get one User by id
 router.get('/:id', (req, res) => {
-    user.findOne({ _id: req.params.id })
+    User.findOne({ _id: req.params.id })
     .then((dbUserData) => res.json(dbUserData));
 });
 
-//create user
+//create User
 router.post('/', (req, res) => {
-    user.create(req.body)
+    User.create(req.body)
     .then((dbUserData) => res.json(dbUserData));
 });
 
-//update user by id
+//update User by id
 router.put('/:id', (req, res) => {
-    user.findOneAndUpdate({ _id: req.params.id}, req.body)
+    User.findOneAndUpdate({ _id: req.params.id}, req.body)
     .then((dbUserData) => res.json(dbUserData));
 });
 
-//delete user
+//delete User
 router.delete('/:id', (req, res) => {
-    user.findOneAndDelete({ _id: req.params.id })
+    User.findOneAndDelete({ _id: req.params.id })
     .then((dbUserData) => res.json(dbUserData));
 });
 
 //add friend
-router.post('/:userId/friends/:friendId', (req, res) => {
-    user.findOneAndUpdate({ _id: req.params.id}, 
+router.post('/:UserId/friends/:friendId', (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.id}, 
         { $addToSet:  { friends: req.params.friendId }},)
     .then((dbUserData) => res.json(dbUserData));
 });
 
 //remove friend
-router.delete('/:userId/friends/:friendId', (req, res) => {
-    user.findOneAndUpdate({ _id: req.params.id},
+router.delete('/:UserId/friends/:friendId', (req, res) => {
+    User.findOneAndUpdate({ _id: req.params.id},
         { $pull: { friends: req.params.friendId }},)
     .then((dbUserData) => res.json(dbUserData));
 });
