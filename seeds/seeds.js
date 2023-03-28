@@ -7,21 +7,29 @@ connection.on('error', (err) => err);
 connection.once('open', async () => {
     console.log('connected');
     //clears the database
-    //await users.deleteMany({});
-    //await thoughts.deleteMany({});
+    await users.deleteMany({});
+    await thoughts.deleteMany({});
 
-    users.create({
-        username: 'johndoe',
+    await users.create({
+        username: 'mr.yes',
         email: 'email1@gmail.com',
     });
+    console.log('user created');
 
-    // users.push({
-    //     username: 'janedoe2',
-    //     email: 'email2@gmail.com',
-    // });
+    await thoughts.create({
+        thoughtText: 'This is a thought',
+        username: 'mr.yes',
+    });
+    console.log('thought created');
+
+    connection.close();
 
 });
 
 // thoughts.push({
 //     thoughtText: 'This is a thought',
 //     username: 'johndoe',
+
+// seedDB().then(() => {
+//     mongoose.connection.close();
+// });
